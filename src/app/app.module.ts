@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import {OAuthService, UrlHelperService, OAuthModule} from "angular-oauth2-oidc";
 import { AppComponent } from './app.component';
 import { ParentComponentComponent } from './parent-component/parent-component.component';
 import { ChildComponentComponent } from './child-component/child-component.component';
@@ -17,8 +17,9 @@ import { OktaCheckComponentComponent } from './okta-check-component/okta-check-c
   imports: [
     BrowserModule,
     HttpClientModule,
+    OAuthModule.forRoot()
   ],
-  providers: [{provide:HTTP_INTERCEPTORS,useClass:TestInterceptor,multi:true}],
+  providers: [OAuthService,UrlHelperService,{provide:HTTP_INTERCEPTORS,useClass:TestInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
